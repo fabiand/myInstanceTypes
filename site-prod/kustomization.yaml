@@ -5,9 +5,14 @@ bases:
 - ../base
 
 patches:
+# We want medium to be generally smaller
 - path: resize-medium.yaml
   target:
     name: ".*\\.medium"
-- path: our-gpus.yaml
+
+# Ensure we set the GPUs we own
+- path: our-gpus.json
   target:
     name: "gn.*"
+
+# Don't drop 8xlarge as we have enough capacity in prod

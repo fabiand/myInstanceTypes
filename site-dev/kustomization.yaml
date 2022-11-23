@@ -7,12 +7,17 @@ bases:
 namePrefix: dev-
 
 patches:
+# We want medium to be generally smaller
 - path: resize-medium.yaml
   target:
     name: ".*\\.medium"
-- path: our-gpus.yaml
+
+# Ensure we set the GPUs we own
+- path: our-gpus.json
   target:
     name: "gn.*"
+
+# We don't have enough cap for 8x in dev
 - path: delete.yaml
   target:
     name: ".*\\.8xlarge"
