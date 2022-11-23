@@ -5,7 +5,10 @@ A few examples of how instanceTypes can be derived for custom modifications.
 To kustomize, run:
 
 ```
-$ kubectl kustomize dev/
+$ kubectl kustomize site-dev
+$ kubectl kustomize site-prod
+# Or
+$ make
 ```
 
 Relevant links
