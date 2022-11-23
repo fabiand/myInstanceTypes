@@ -10,3 +10,9 @@ patches:
 - path: resize-medium.yaml
   target:
     name: ".*\\.medium"
+- path: our-gpus.yaml
+  target:
+    name: "gn.*"
+- path: delete.yaml
+  target:
+    name: ".*\\.8xlarge"
