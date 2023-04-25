@@ -1,4 +1,4 @@
-SRCS=$(shell find components base site-*/ -type f)
+SRCS=$(shell find site-*/ -type f)
 
 all: site-dev.yaml site-prod.yaml
 

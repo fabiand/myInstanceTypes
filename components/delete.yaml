@@ -1,5 +1,0 @@
-iapiVersion: kubevirt.io/v1alpha1
-kind: VirtualMachineInstanceType
-metadata:
-  name: ignore
-$patch: delete
