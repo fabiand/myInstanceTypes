@@ -1,6 +1,6 @@
 [
   {"op": "replace",
-   "path": "/spec/gpus/0/resourceName",
+   "path": "/spec/gpus/0/name",
    "X-internal-comment": "Joe said we only had old T4s",
    "value": "nvidia.com/T4"}
 ]

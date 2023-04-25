@@ -7,17 +7,21 @@ bases:
 namePrefix: dev-
 
 patches:
-# We want medium to be generally smaller
+# We resize the *\.medium instance types
+# Because we want medium to be generally smaller
 - path: resize-medium.yaml
   target:
     name: ".*\\.medium"
 
-# Ensure we set the GPUs we own
+# The dev env has their own set of GPUs, thus ensure that
+# we point to the dev ones.
 - path: dev-gpus.json
   target:
     name: "gn.*"
 
 # We don't have enough cap for 8x in dev
+# thus delete these VMIT
+# Also delete co1 as this is not yet supported
 - path: delete.yaml
   target:
-    name: ".*\\.8xlarge"
+    name: ".*\\.8xlarge|co1\\..*"
