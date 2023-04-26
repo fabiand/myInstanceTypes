@@ -27,7 +27,7 @@ is needed.
 
 Locally the custom instanceTypes can be produced by running:
 
-```
+```console
 $ kubectl kustomize
 ```
 
@@ -49,7 +49,7 @@ automate the whole deplpoyment.
 
 ## 2. Deploy the `dev instanceTypes` "App"
 
-```
+```console
 # Deploy the small app:
 $ oc apply -n fabiand -f app.yaml
 application.argoproj.io/dev-instancetypes-app created
@@ -64,7 +64,7 @@ Within seconds, argo should have reconciled the app.
 This means the repo was cloned, kustomize applied, and resulting
 artifacts deployed to the cluster:
 
-```
+```console
 $ oc get virtualmachineinstancetypes -n fabiand
 NAME              AGE
 dev-c1.2xlarge    52s
@@ -83,7 +83,7 @@ dev-cx1.medium    52s
 Optionally you can log into the Argo CD dashbaord in oreder to
 check what's going on:
 
-```
+```console
 # Get the Argo admin password:
 $ oc get -n fabiand secret argocd-cluster -o jsonpath='{.data.admin\.password}' | base64 -d
 Tc7E9v1neFp8BAOZG…
