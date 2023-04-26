@@ -7,6 +7,22 @@ This example does two things:
 1. Use kustomize to create custom variants
 2. Use Argo CD application to deploy these files to a cluster
 
+This repository is very simple. There is no magic outside of
+this repository besides Argo CD and Kustomize.
+
+## Kustomize
+
+[dev/kustomization.yaml](dev/kustomization.yaml) shows what
+kind of modifications are done to the
+[stock instanceTypes](https://github.com/fabiand/instanceTypes/).
+
+## Application
+
+[dev-app.yaml](dev-app.yaml) defines how Argo CD should consume
+this repo, and sync it to the cluster.
+Argo CD has built-in support for kustomize, therefore nothing else
+is needed.
+
 # Local build
 
 Locally the custom instanceTypes can be produced by running:
@@ -18,13 +34,13 @@ $ kubectl kustomize prod
 
 # Deploy to cluster with Argo on OpenShift
 
-The file [dev-app.yaml](dev-app.yaml) is an Argo Application
-definition. Submitting this file to an Argo enabled cluster will
-automate the whole deplpoyment.
-
 > **Note**
 > The yaml below assumes the namespace `fabiand`
 > Adjust the yaml if you want to deploy the custom ITs elsewhere
+
+The file [dev-app.yaml](dev-app.yaml) is an Argo Application
+definition. Submitting this file to an Argo enabled cluster will
+automate the whole deplpoyment.
 
 ## 1. Install OpenShift GitOps Operator and 
 
@@ -84,5 +100,6 @@ from the last step.
 # References
 
 Relevant links
+- https://redhat-scholars.github.io/argocd-tutorial/argocd-tutorial/index.html
 - https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/
 - https://github.com/kubernetes-sigs/kustomize
