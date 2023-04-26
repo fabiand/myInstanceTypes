@@ -22,6 +22,6 @@ patches:
 # We don't have enough cap for 8x in dev
 # thus delete these VMIT
 # Also delete co1 as this is not yet supported
-- path: assets/delete.yaml
+- path: assets/delete-instancetype.yaml
   target:
     name: ".*\\.8xlarge|co1\\..*"
