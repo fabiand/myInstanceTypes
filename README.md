@@ -97,6 +97,17 @@ argocd-server-fabiand.apps.example.com
 Now log into the Argo CD dashboard using `admin` and the password
 from the last step.
 
+## 5. Optional: Comparing overlays
+
+It's helpful to compare how overlays / environments differ, you can
+do this by:
+
+```
+$ kubectl kustomize overlays/staging > staging.yaml
+$ kubectl kustomize overlays/production > production.yaml
+$ vimdiff staging.yaml production.yaml
+```
+
 # References
 
 Relevant links
