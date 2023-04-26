@@ -16,20 +16,32 @@ $ kubectl kustomize dev
 $ kubectl kustomize prod
 ```
 
-# Deploy to cluster with argo on OpenShift
-## 1. Install OpenShift GitOps Operator
+# Deploy to cluster with Argo on OpenShift
 
-Using the regular OperatorHub workflow.
-
-## 2. Enable Argo in a namespace 
+The file [dev-app.yaml](dev-app.yaml) is an Argo Application
+definition. Submitting this file to an Argo enabled cluster will
+automate the whole deplpoyment.
 
 > **Note**
 > The yaml below assumes the namespace `fabiand`
 > Adjust the yaml if you want to deploy the custom ITs elsewhere
 
+## 1. Install OpenShift GitOps Operator and 
+
+1. Install OpenShift GitOps using the regular OperatorHub workflow
+2. Enable Argo in a namespace by creating an `ArgoCD` object
+   (Use the Operator UI to do this)
+
+## 2. Deploy the `dev instanceTypes` "App"
+
 ```
-$ oc apply -f dev-app.yaml
+# Deploy the small app:
+$ oc apply -n fabiand -f dev-app.yaml
+application.argoproj.io/dev-instancetypes-app created
 ```
+
+That's it. Argo CD will pick up the new app, and start deploying it
+immediately.
 
 ## 3. Verify deployment of custom instanceTypes
 
@@ -50,6 +62,24 @@ dev-cx1.large     52s
 dev-cx1.medium    52s
 …
 ```
+
+## 4. Optional: View Argo CD dashboard
+
+Optionally you can log into the Argo CD dashbaord in oreder to
+check what's going on:
+
+```
+# Get the Argo admin password:
+$ oc get -n fabiand secret argocd-cluster -o jsonpath='{.data.admin\.password}' | base64 -d
+Tc7E9v1neFp8BAOZG…
+
+# Get the Argo dashboard path with:
+$ oc get -n fabiand argocd argocd -o jsonpath="{.status.host}"
+argocd-server-fabiand.apps.example.com
+```
+
+Now log into the Argo CD dashboard using `admin` and the password
+from the last step.
 
 # References
 
