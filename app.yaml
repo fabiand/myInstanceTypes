@@ -12,7 +12,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: dev
+    path: .
     repoURL: https://github.com/fabiand/myInstanceTypes
     targetRevision: main
   syncPolicy:

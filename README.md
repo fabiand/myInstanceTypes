@@ -18,7 +18,7 @@ kind of modifications are done to the
 
 ## Application
 
-[dev-app.yaml](dev-app.yaml) defines how Argo CD should consume
+[app.yaml](app.yaml) defines how Argo CD should consume
 this repo, and sync it to the cluster.
 Argo CD has built-in support for kustomize, therefore nothing else
 is needed.
@@ -28,8 +28,7 @@ is needed.
 Locally the custom instanceTypes can be produced by running:
 
 ```
-$ kubectl kustomize dev
-$ kubectl kustomize prod
+$ kubectl kustomize
 ```
 
 # Deploy to cluster with Argo on OpenShift
@@ -38,7 +37,7 @@ $ kubectl kustomize prod
 > The yaml below assumes the namespace `fabiand`
 > Adjust the yaml if you want to deploy the custom ITs elsewhere
 
-The file [dev-app.yaml](dev-app.yaml) is an Argo Application
+The file [app.yaml](app.yaml) is an Argo Application
 definition. Submitting this file to an Argo enabled cluster will
 automate the whole deplpoyment.
 
@@ -52,7 +51,7 @@ automate the whole deplpoyment.
 
 ```
 # Deploy the small app:
-$ oc apply -n fabiand -f dev-app.yaml
+$ oc apply -n fabiand -f app.yaml
 application.argoproj.io/dev-instancetypes-app created
 ```
 
