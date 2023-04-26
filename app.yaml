@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dev-instancetypes-app
+  name: it-dev
   # Replace with the namespace where Argo is running
   namespace: fabiand
 spec:
