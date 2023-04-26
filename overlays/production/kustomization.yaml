@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+  - ../../base
+
+patches:
+  # The dev env has their own set of GPUs, thus ensure that
+  # we point to the dev ones.
+  - path: gpus.json
+    target:
+      name: "gn.*"
+
+  # Delete co1 as this is not yet supported
+  - path: delete-instancetype.yaml
+    target:
+      name: "co1\\..*"

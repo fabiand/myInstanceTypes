@@ -12,14 +12,15 @@ this repository besides Argo CD and Kustomize.
 
 ## Kustomize
 
-[dev/kustomization.yaml](dev/kustomization.yaml) shows what
-kind of modifications are done to the
+[overlays/staging/kustomization.yaml](overlays/staging/kustomization.yaml)
+shows what kind of modifications are done to the
 [stock instanceTypes](https://github.com/fabiand/instanceTypes/).
+The same is true for the `production` overlay.
 
 ## Application
 
-[app.yaml](app.yaml) defines how Argo CD should consume
-this repo, and sync it to the cluster.
+[staging.app.argocd.yaml](staging.app.argocd.yaml) defines how
+Argo CD should consume this repo, and sync it to the cluster.
 Argo CD has built-in support for kustomize, therefore nothing else
 is needed.
 
@@ -37,9 +38,9 @@ $ kubectl kustomize
 > The yaml below assumes the namespace `fabiand`
 > Adjust the yaml if you want to deploy the custom ITs elsewhere
 
-The file [app.yaml](app.yaml) is an Argo Application
-definition. Submitting this file to an Argo enabled cluster will
-automate the whole deplpoyment.
+The file [staging.app.argocd.yaml](staging.app.argocd.yaml) is an
+Argo Application definition. Submitting this file to an Argo enabled
+cluster will automate the whole deplpoyment.
 
 ## 1. Install OpenShift GitOps Operator and 
 
@@ -47,12 +48,12 @@ automate the whole deplpoyment.
 2. Enable Argo in a namespace by creating an `ArgoCD` object
    (Use the Operator UI to do this)
 
-## 2. Deploy the `dev instanceTypes` "App"
+## 2. Deploy the /staging instanceTypes/ "App"
 
 ```console
 # Deploy the small app:
-$ oc apply -n fabiand -f app.yaml
-application.argoproj.io/dev-instancetypes-app created
+$ oc apply -n fabiand -f staging.app.argocd.yaml
+application.argoproj.io/it-staging created
 ```
 
 That's it. Argo CD will pick up the new app, and start deploying it
@@ -67,14 +68,14 @@ artifacts deployed to the cluster:
 ```console
 $ oc get virtualmachineinstancetypes -n fabiand
 NAME              AGE
-dev-c1.2xlarge    52s
-dev-c1.4xlarge    52s
-dev-c1.large      52s
-dev-c1.medium     52s
-dev-cx1.2xlarge   52s
-dev-cx1.4xlarge   52s
-dev-cx1.large     52s
-dev-cx1.medium    52s
+staging-c1.2xlarge    52s
+staging-c1.4xlarge    52s
+staging-c1.large      52s
+staging-c1.medium     52s
+staging-cx1.2xlarge   52s
+staging-cx1.4xlarge   52s
+staging-cx1.large     52s
+staging-cx1.medium    52s
 …
 ```
 
@@ -99,6 +100,13 @@ from the last step.
 # References
 
 Relevant links
-- https://redhat-scholars.github.io/argocd-tutorial/argocd-tutorial/index.html
-- https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/
-- https://github.com/kubernetes-sigs/kustomize
+- Argo CD
+  - https://redhat-scholars.github.io/argocd-tutorial/argocd-tutorial/index.html
+- Kustomize
+  - https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/
+  - https://github.com/kubernetes-sigs/kustomize
+- GitOps patterns
+  - https://developers.redhat.com/articles/2022/07/20/git-workflows-best-practices-gitops-deployments
+  - https://codefresh.io/blog/stop-using-branches-deploying-different-gitops-environments/
+  - https://codefresh.io/blog/how-to-model-your-gitops-environments-and-promote-releases-between-them/
+  - https://codefresh.io/blog/applied-gitops-with-kustomize/

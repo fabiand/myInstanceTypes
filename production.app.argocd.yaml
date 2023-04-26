@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: it-dev
+  name: it-production
   # Replace with the namespace where Argo is running
   namespace: fabiand
 spec:
@@ -12,7 +12,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: .
+    path: overlays/production
     repoURL: https://github.com/fabiand/myInstanceTypes
     targetRevision: main
   syncPolicy:
