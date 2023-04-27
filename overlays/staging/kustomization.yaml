@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - ../../base
+  - ../c1.small
 
 namePrefix: staging-
 

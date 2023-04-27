@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - https://raw.githubusercontent.com/fabiand/instanceTypes/main/series/c1/c1.yaml
+
+nameSuffix: .small
+
+patches:
+  - patch: |-
+      apiVersion: instancetype.kubevirt.io/v1alpha2
+      kind: VirtualMachineInstancetype
+      metadata:
+        name: "small"
+      spec:
+        cpu:
+          guest: 1
+        memory:
+          guest: "256Mi"
+    target:
+      name: ".*"

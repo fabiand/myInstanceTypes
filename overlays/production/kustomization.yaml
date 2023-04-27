@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - ../../base
+  - ../c1.small
 
 components:
   # Delete co1 as this is not yet supported
