@@ -16,6 +16,6 @@ patches:
         cpu:
           guest: 1
         memory:
-          guest: "256Mi"
+          guest: "256Gi"
     target:
       name: ".*"
