@@ -1,5 +1,5 @@
-%.overlay.yaml: overlays/%/
+%.env.yaml: envs/%/
 	kubectl kustomize $< > $@
 
-diff: staging.overlay.yaml production.overlay.yaml
+diff: staging.env.yaml production.env.yaml
 	diff --color -u $^

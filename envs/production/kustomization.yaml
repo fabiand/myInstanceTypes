@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   # In reality we would probably 'vendor' a specifc versioned manifest
   - https://raw.githubusercontent.com/fabiand/instanceTypes/main/instanceTypes.yaml
-  - ../c1.small
+  - ../../overlays/c1.small
 
 components:
   # Delete co1 as this is not yet supported
